@@ -22,8 +22,11 @@ jobs:
       - python/install-packages:
           pkg-manager: pip
           pip-dependency-file: requirements.txt # if you have a different name for your requirements file, maybe one that combines your runtime and test requirements.
-      - run: python3 -m pytest tests/unit_test.py
-      - run: python3 -m pytest tests/test_routes.py
+      - run: coverage run -m pytest tests/
+      - run: coverage report
+      - run coverage html
+      - store_artifacts:
+          path: htmlcov
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
